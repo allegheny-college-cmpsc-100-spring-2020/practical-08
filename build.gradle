@@ -1,0 +1,48 @@
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+    mavenLocal()
+    dependencies {
+      classpath "gradle.plugin.org.gatored:gatorgradle:0.4.+"
+    }
+  }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.gatored.gatorgradle'
+
+repositories {
+  mavenLocal()
+  jcenter()
+  mavenCentral()
+}
+
+apply plugin: 'application'
+mainClassName = 'practicaleight.GumballMachine'
+
+apply plugin: 'checkstyle'
+checkstyle.toolVersion = '8.1'
+checkstyle {
+  ignoreFailures = false
+  maxWarnings = 0
+  maxErrors = 0
+  configFile = new File(rootDir, "config/checkstyle/google_checks.xml")
+}
+
+task interactiveRun (type: JavaExec, dependsOn: 'classes') {
+  apply plugin: 'application'
+  classpath = sourceSets.main.runtimeClasspath
+  main = 'practicaleight/GumballMachine'
+  Random random = new Random();
+  String input = new String();
+  switch(random.nextInt(2)) {
+    case 1:
+      input = "y";
+    default:
+      input = "n";
+  }
+  InputStream stream = new ByteArrayInputStream(input.getBytes());
+  standardInput = stream
+}

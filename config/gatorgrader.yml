@@ -1,0 +1,31 @@
+---
+name: practical-08
+break: true
+indent: 4
+---
+
+src/main/java/practicaleight:
+    GumballMachine.java:
+        ConfirmFileExists
+        CountSingleLineComments --language Java --count 5
+        MatchFileFragment --fragment "{Your Name Here}" --count 0 --exact
+        MatchFileFragment --fragment "TODO" --count 0 --exact
+        MatchFileFragment --fragment "switch" --count 1
+        MatchFileFragment --fragment "new Gumball();" --count 1 --exact
+        MatchFileFragment --fragment ".toUpperCase();" --count 1 --exact
+        MatchFileFragment --fragment ".nextLine()" --count 1 --exact
+        MatchFileFragment --fragment "new Scanner(System.in);" --count 1 --exact
+        MatchFileFragment --fragment "case" --count 1 --exact
+
+src/main/java/practicaleight:
+    Gumball.java:
+        ConfirmFileExists
+        MatchFileFragment --fragment "{Your Name Here}" --count 0 --exact
+        MatchFileFragment --fragment "TODO" --count 0 --exact
+        MatchFileFragment --fragment "switch" --count 1
+        MatchFileFragment --fragment "case" --count 4
+        MatchFileFragment --fragment "break" --count 4
+        
+        
+ExecuteCommand --command "gradle build"
+ExecuteCommand --command "gradle -q --console plain interactiveRun"
