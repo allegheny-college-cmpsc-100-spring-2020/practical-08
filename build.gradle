@@ -46,3 +46,7 @@ task interactiveRun (type: JavaExec, dependsOn: 'classes') {
   InputStream stream = new ByteArrayInputStream(input.getBytes());
   standardInput = stream
 }
+
+run {
+  standardInput = System.in
+}
